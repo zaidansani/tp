@@ -16,9 +16,6 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
 
-    // Static counter to track the number of persons
-    private static int personIDCounter = 0;
-
     // Unique person ID
     private final int personId;
 
@@ -34,16 +31,15 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address,
+                  int personId, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.personId = personId;
         this.tags.addAll(tags);
-
-        // Increment the static counter and assign a unique ID to the person
-        this.personId = ++personIDCounter;
     }
 
     public int getPersonId() {
@@ -107,7 +103,8 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && personId == (otherPerson.personId);
     }
 
     @Override
@@ -124,6 +121,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("personID", personId)
                 .toString();
     }
 

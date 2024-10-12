@@ -12,7 +12,9 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
+import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.Person;
 
 /**
  * A class to access AddressBook data stored as a json file on the hard disk.
@@ -52,7 +54,9 @@ public class JsonAddressBookStorage implements AddressBookStorage {
         }
 
         try {
-            return Optional.of(jsonAddressBook.get().toModelType());
+            Optional<ReadOnlyAddressBook> addressBook = Optional.of(jsonAddressBook.get().toModelType());
+            Person.setPersonIDCounter(addressBook.get().getCounter());
+            return addressBook;
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataLoadingException(ive);
