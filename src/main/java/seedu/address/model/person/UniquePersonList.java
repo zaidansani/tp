@@ -114,6 +114,15 @@ public class UniquePersonList implements Iterable<Person> {
                 .filter(person -> person.getPersonId() == personId)
                 .findFirst();
     }
+
+    /**
+     * Finds the person with corresponding person ID, if exists.
+     */
+    public boolean hasPersonWithPersonId(int personId) {
+        return internalList.stream()
+            .anyMatch(person -> person.getPersonId() == personId);
+    }
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */

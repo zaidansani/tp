@@ -214,6 +214,11 @@ public class AddAppointmentCommandTest {
         }
 
         @Override
+        public boolean hasPersonWithPersonId(int personId) {
+            return true;
+        }
+
+        @Override
         public void deleteAppointment(Appointment target) {
             throw new AssertionError("This method should not be called.");
         }

@@ -93,6 +93,21 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasPersonWithPersonId_returnsFalse() {
+        // EP: invalid personId value
+        assertFalse(modelManager.hasPersonWithPersonId(-1));
+        // EP: personId not existing in book
+        assertFalse(modelManager.hasPersonWithPersonId(1000));
+    }
+
+    @Test
+    public void hasPersonWithPersonId_returnsTrue() {
+        // EP: has person inside
+        modelManager.addPerson(ALICE);
+        assertTrue(modelManager.hasPersonWithPersonId(0));
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }

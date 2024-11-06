@@ -140,6 +140,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasPersonWithPersonId(int personId) {
+        return addressBook.hasPersonWithPersonId(personId);
+    }
+
+    @Override
     public Person addPerson(PersonDescriptor personDescriptor) {
         Person person = addressBook.addPerson(personDescriptor);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

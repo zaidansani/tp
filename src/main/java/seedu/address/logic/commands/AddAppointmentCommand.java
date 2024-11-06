@@ -62,7 +62,22 @@ public class AddAppointmentCommand extends AddCommand {
      */
     @Override
     protected boolean alreadyExists(Model model) {
-        return model.hasAppointment(appointmentDescriptor);
+        return model.hasAppointment(appointmentDescriptor) && checkPersonIdExists(model);
+    }
+
+    /**
+     * Gets the person and throws exception if it does not exist.
+     */
+    protected Person getPerson(Model model) throws CommandException {
+        Optional<Person> personOptional = model.findPerson(personId);
+        return personOptional.orElseThrow(() -> new CommandException(getPersonIdDoesNotExistMessage()));
+    }
+
+    /**
+     * Checks if personId exists inside model
+     */
+    protected boolean checkPersonIdExists(Model model) {
+        return model.hasPersonWithPersonId(personId);
     }
 
     /**
@@ -73,11 +88,7 @@ public class AddAppointmentCommand extends AddCommand {
      */
     @Override
     protected void addEntity(Model model) throws CommandException {
-        Optional<Person> personOptional = model.findPerson(personId);
-        if (personOptional.isEmpty()) {
-            throw new CommandException(getPersonIdDoesNotExistMessage());
-        }
-        model.addAppointment(personOptional.get(), appointmentDescriptor);
+        model.addAppointment(getPerson(model), appointmentDescriptor);
     }
 
     /**

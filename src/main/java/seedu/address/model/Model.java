@@ -75,6 +75,11 @@ public interface Model {
     Optional<Person> findPerson(int personId);
 
     /**
+     * Checks if the model has a person with the personId
+     */
+    boolean hasPersonWithPersonId(int personId);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */

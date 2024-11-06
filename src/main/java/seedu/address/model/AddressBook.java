@@ -89,7 +89,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.contains(personDescriptor);
     }
 
-
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
@@ -132,6 +131,11 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public Optional<Person> findPerson(int personId) {
         return persons.findPerson(personId);
+    }
+
+    @Override
+    public boolean hasPersonWithPersonId(int personId) {
+        return persons.hasPersonWithPersonId(personId);
     }
 
     //// util methods

@@ -23,6 +23,11 @@ public interface ReadOnlyAddressBook {
     Optional<Person> findPerson(int personId);
 
     /**
+     * Returns true if personId exists in the person observable list
+     */
+    boolean hasPersonWithPersonId(int personId);
+
+    /**
      * Returns the next person ID
      */
     int getNextPersonId();

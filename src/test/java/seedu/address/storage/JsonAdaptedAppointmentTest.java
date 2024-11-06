@@ -160,6 +160,12 @@ class JsonAdaptedAppointmentTest {
         }
 
         @Override
+        public boolean hasPersonWithPersonId(int personId) {
+            return persons.stream()
+                .anyMatch(person -> person.getPersonId() == personId);
+        }
+
+        @Override
         public int getNextPersonId() {
             return persons.size();
         }
